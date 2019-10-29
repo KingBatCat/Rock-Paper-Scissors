@@ -2,7 +2,31 @@
 <html>
     <body>
         <script>
-        
+
+        const options = ["rock", "paper", "scissors"];
+
+
+        function computerPlay(){
+            return options[Math.floor(Math.random() * 3)];
+        }
+
+        function playerSelection(){
+            let answer = prompt("Rock, Paper, or Scissors?");
+            return options.includes(answer.toLowerCase()) ? answer : playerSelection();
+        }
+
+        function gamePlay(playerChoice, computerSelection) {
+            playerChoice = playerSelection();
+            computerSelection = computerPlay();
+        }
+
+        //if(choice == 0) {
+        //    return "Rock"
+        //   } else if(choice == 1) {
+        //        return "Paper"
+        //    } else {
+        //        return "Scissors"
+        //    }
         </script>
     </body>
 </html>
