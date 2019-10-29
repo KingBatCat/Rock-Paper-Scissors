@@ -18,15 +18,43 @@
         function gamePlay(playerChoice, computerSelection) {
             playerChoice = playerSelection();
             computerSelection = computerPlay();
-        }
 
-        //if(choice == 0) {
-        //    return "Rock"
-        //   } else if(choice == 1) {
-        //        return "Paper"
-        //    } else {
-        //        return "Scissors"
-        //    }
+            switch(playerChoice) {
+                case "rock":
+                
+                if (computerSelection === "rock") {
+                    return "It's a tie!";
+                } else if (computerSelection === "paper") {
+                    return "You lose."
+                } else {
+                    return "You win!"
+                };
+                break;
+
+                case "paper":
+                
+                if (computerSelection === "rock") {
+                    return "You win!"
+                } else if (computerSelection === "paper") {
+                    return "It's a tie!"
+                } else {
+                    return "You lose."
+                };
+                break;
+
+                case "scissors":
+
+                if (computerSelection === "rock") {
+                    return "You lose."
+                } else if (computerSelection === "paper") {
+                    return "You win!"
+                } else {
+                    return "It's a tie!"
+                };
+                break;
+                
+            }
+        }
         </script>
     </body>
 </html>
