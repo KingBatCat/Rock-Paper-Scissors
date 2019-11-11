@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+
+        const options = ["rock", "paper", "scissors"];
+        let points = {player: 0, computer: 0};
+        // Get the computers choice
+        function computerPlay(){
+            return options[Math.floor(Math.random() * 3)];
+        }
+        // Get the players choice
+        function playerSelection(){
+            let answer = prompt("Rock, Paper, or Scissors?");
+            return options.includes(answer.toLowerCase()) ? answer : playerSelection();
+        }
+
+        function gamePlay(playerChoice, computerSelection) {
+            playerChoice = playerSelection();
+            computerSelection = computerPlay();
+
+            switch(playerChoice) {
+                case "rock":
+                
+                if (computerSelection === "rock") {
+                    return "It's a tie!";
+                } else if (computerSelection === "paper") {
+                    score("computer");
+                    return "You lose. Paper beats Rock."
+                } else {
+                    score("player");
+                    return "You win! Rock beats Scissors!"
+                };
+                break;
+
+                case "paper":
+                
+                if (computerSelection === "rock") {
+                    score("player");
+                    return "You win! Rock beats Scissors!"
+                } else if (computerSelection === "paper") {
+                    return "It's a tie!"
+                } else {
+                    score("computer")
+                    return "You lose. Paper beats Rock."
+                };
+                break;
+
+                case "scissors":
+
+                if (computerSelection === "rock") {
+                    score("computer");
+                    return "You lose. Rock beats Scissors."
+                } else if (computerSelection === "paper") {
+                    score("player");
+                    return "You win! Paper beats Rock!"
+                } else {
+                    return "It's a tie!"
+                };
+                break;
+
+            }
+        }
+
+        function score(winner){
+            winner == "player" ? points.player++ : points.computer++;
+            console.log("Player: " + points.player + "\nComputer: " + points.computer);
+        }
+
+        function game(){
+            do {gamePlay();}
+         while (!(points.player >= 5 || points.computer >= 5))
+        points.player == 5 ? console.log("Game over! You win!") : console.log("Game over! You lose!")
+        }
+
+        game();
+        </script>
+    </body>
+</html>

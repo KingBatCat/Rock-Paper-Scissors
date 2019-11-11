@@ -1,62 +1,102 @@
 <!DOCTYPE html>
 <html>
     <body>
+        <h3>Choose one to play!</h3>
+        <button id='rock'>Rock</button>
+        <button id='paper'>Paper</button> 
+        <button id='scissors'>Scissors</button>
+        <div id='results'></div>
+        <div id='score'></div>
+        <div id='gameover'></div>
+        
         <script>
 
+        const buttons = document.querySelectorAll('button');
         const options = ["rock", "paper", "scissors"];
+        const results = document.getElementById('results');
+        const scores = document.getElementById('score');
+        const gameover = document.getElementById('gameover');
+
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', function()  {
+                gamePlay(playerSelection(event.target.id), computerPlay());
+                
+
+            });
+        });
+
         let points = {player: 0, computer: 0};
         // Get the computers choice
         function computerPlay(){
+            let compChoice = options[Math.floor(Math.random() * 3)];
             return options[Math.floor(Math.random() * 3)];
         }
-        // Get the players choice
-        function playerSelection(){
-            let answer = prompt("Rock, Paper, or Scissors?");
-            return options.includes(answer.toLowerCase()) ? answer : playerSelection();
+        //Get the players choice
+        function playerSelection(choice){
+            return choice;
         }
 
         function gamePlay(playerChoice, computerSelection) {
-            playerChoice = playerSelection();
+            
             computerSelection = computerPlay();
 
             switch(playerChoice) {
                 case "rock":
                 
                 if (computerSelection === "rock") {
-                    return "It's a tie!";
+                    results.textContent = "It's a tie!";
                 } else if (computerSelection === "paper") {
                     score("computer");
-                    return "You lose. Paper beats Rock."
+                    results.textContent = "You lose. Paper beats Rock.";
                 } else {
                     score("player");
-                    return "You win! Rock beats Scissors!"
-                };
+                    results.textContent = "You win! Rock beats Scissors!";
+                } if(points.player == 5) {
+                    gameover.textContent = 'Gameover, you win!';
+                    points = {player: 0, computer: 0};
+                } else if(points.computer == 5) {
+                    gameover.textContent = 'Gameover, you lose!';
+                    points = {player: 0, computer: 0};
+                }
                 break;
 
                 case "paper":
                 
                 if (computerSelection === "rock") {
                     score("player");
-                    return "You win! Rock beats Scissors!"
+                    results.textContent = "You win! Rock beats Scissors!";
                 } else if (computerSelection === "paper") {
-                    return "It's a tie!"
+                    results.textContent = "It's a tie!";
                 } else {
                     score("computer")
-                    return "You lose. Paper beats Rock."
-                };
+                    results.textContent = "You lose. Paper beats Rock.";
+                } if(points.player == 5) {
+                    gameover.textContent = 'Gameover, you win!';
+                    points = {player: 0, computer: 0};
+                } else if(points.computer == 5) {
+                    gameover.textContent = 'Gameover, you lose!';
+                    points = {player: 0, computer: 0};
+                }
                 break;
 
                 case "scissors":
 
                 if (computerSelection === "rock") {
                     score("computer");
-                    return "You lose. Rock beats Scissors."
+                    results.textContent = "You lose. Rock beats Scissors.";
                 } else if (computerSelection === "paper") {
                     score("player");
-                    return "You win! Paper beats Rock!"
+                    results.textContent = "You win! Paper beats Rock!";
                 } else {
-                    return "It's a tie!"
-                };
+                    results.textContent = "It's a tie!";
+                } if(points.player == 5) {
+                    gameover.textContent = 'Gameover, you win!';
+                    points = {player: 0, computer: 0};
+                } else if(points.computer == 5) {
+                    gameover.textContent = 'Gameover, you lose!';
+                    points = {player: 0, computer: 0};
+                }
                 break;
 
             }
@@ -64,16 +104,9 @@
 
         function score(winner){
             winner == "player" ? points.player++ : points.computer++;
-            console.log("Player: " + points.player + "\nComputer: " + points.computer);
+            scores.textContent = "Player: " + points.player + "\nComputer: " + points.computer;
         }
-
-        function game(){
-            do {gamePlay();}
-         while (!(points.player >= 5 || points.computer >= 5))
-        points.player == 5 ? console.log("Game over! You win!") : console.log("Game over! You lose!")
-        }
-
-        game();
+       
         </script>
     </body>
 </html>
